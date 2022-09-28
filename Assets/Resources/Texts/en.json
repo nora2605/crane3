@@ -4,6 +4,10 @@
     { "key": "img_title", "value": "Localization/title_en" },
     { "key": "txt_buttonplay", "value": "Play" },
     { "key": "txt_buttonsettings", "value": "Settings" },
-    { "key": "txt_buttonquit", "value": "Exit" }
+    { "key": "txt_buttonquit", "value": "Exit" },
+    { "key": "txt_settingslabel", "value": "Settings" },
+    { "key": "txt_languagelabel", "value": "Language" },
+    { "key": "txt_buttonapply", "value": "Apply" },
+    { "key": "txt_buttonclose", "value": "Close" }
   ]
 }

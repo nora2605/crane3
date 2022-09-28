@@ -4,6 +4,11 @@
     { "key": "img_title", "value": "Localization/title_de" },
     { "key": "txt_buttonplay", "value": "Spielen" },
     { "key": "txt_buttonsettings", "value": "Einstellungen" },
-    { "key": "txt_buttonquit", "value": "Beenden" }
+    { "key": "txt_buttonquit", "value": "Beenden" },
+    { "key": "txt_settingslabel", "value": "Einstellungen" },
+    { "key": "txt_languagelabel", "value": "Sprache" },
+    { "key": "txt_buttonapply", "value": "Anwenden" },
+    { "key": "txt_buttonclose", "value": "Schließen" },
+    { "key": "txt_resolutionlabel", "value": "Auflösung" }
   ]
 }

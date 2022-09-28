@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0649: Dem Feld "Texts.cutscenes" wird nie etwas zugewiesen, und es hat immer seinen Standardwert von "null".
+dotnet_diagnostic.CS0649.severity = warning

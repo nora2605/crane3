@@ -7,7 +7,7 @@ public class CutsceneController : MonoBehaviour
 {
     private VideoPlayer vp;
     public Canvas canvas;
-    public CanvasGroup canvasGroup;
+    private CanvasGroup canvasGroup;
     private AudioSource aS;
 
     private float lerpDuration = 3.0f;
@@ -17,6 +17,9 @@ public class CutsceneController : MonoBehaviour
     {
         vp = Camera.main.GetComponent<VideoPlayer>();
         aS = Camera.main.GetComponent<AudioSource>();
+
+        canvasGroup = canvas.GetComponent<CanvasGroup>();
+        canvas.gameObject.SetActive(false);
 
         vp.loopPointReached += stoppedCutscene;
     }

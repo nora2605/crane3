@@ -1,0 +1,9 @@
+{
+  "cutscenes": {},
+  "ui": [
+    { "key": "img_title", "value": "Localization/title_en" },
+    { "key": "txt_buttonplay", "value": "Play" },
+    { "key": "txt_buttonsettings", "value": "Settings" },
+    { "key": "txt_buttonquit", "value": "Exit" }
+  ]
+}

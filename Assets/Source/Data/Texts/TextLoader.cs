@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Data.Texts
+namespace Data.Texts
 {
     internal class TextLoader
     {
@@ -17,9 +17,8 @@ namespace Assets.Data.Texts
 
         public static Schemas.Texts LoadLanguage(string langCode)
         {
-            
             return Schemas.Texts.FromJson(
-                langs.First(x => x.name.Contains(langCode)).text
+                langs.First(x => x.name == langCode)?.text ?? langs.First(x => x.name == "en").text
             );
         } 
     }

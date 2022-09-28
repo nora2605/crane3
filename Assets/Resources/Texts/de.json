@@ -1,3 +1,9 @@
 {
-  "cutscenes": {}
+  "cutscenes": {},
+  "ui": [
+    { "key": "img_title", "value": "Localization/title_de" },
+    { "key": "txt_buttonplay", "value": "Spielen" },
+    { "key": "txt_buttonsettings", "value": "Einstellungen" },
+    { "key": "txt_buttonquit", "value": "Beenden" }
+  ]
 }

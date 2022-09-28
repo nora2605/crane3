@@ -5,16 +5,42 @@ using System.Text;
 using UnityEngine;
 using System.Threading.Tasks;
 using UnityEditor;
+using System.Runtime.Serialization;
+using System.Net.Http.Headers;
 
-namespace Assets.Data.Texts.Schemas
+#pragma warning disable CS0649
+
+namespace Data.Texts.Schemas
 {
     [Serializable]
     internal class Texts
     {
-        public readonly Cutscene[] cutscenes;
-        public readonly Dialog[] dialog;
-        public readonly Dialog[] extras;
-        public readonly Dictionary<string, string> UI;
+        public Cutscene[] cutscenes;
+        public Dialog[] dialog;
+        public Dialog[] extras;
+        public Dictionary<string, string> UI { get => ToDictionary(this.ui); }
+        public KVPair[] ui;
+
+        public Texts(Cutscene[] cutscenes, Dialog[] dialog, Dialog[] extras, KVPair[] ui)
+        {
+            this.cutscenes = cutscenes;
+            this.dialog = dialog;
+            this.extras = extras;
+            this.ui = ui;
+        }
+
+        private Dictionary<string, string> ToDictionary(KVPair[] arr)
+        {
+            Dictionary<string, string> result = new();
+            if (arr != null)
+            {
+                foreach (KVPair o in arr)
+                {
+                    result.Add(o.key, o.value);
+                }
+            }
+            return result;
+        }
 
         public static Texts FromJson(string json)
         {
@@ -23,37 +49,79 @@ namespace Assets.Data.Texts.Schemas
     }
 
     [Serializable]
+    internal class KVPair
+    {
+        public string key;
+        public string value;
+
+        public KVPair(string key, string value)
+        {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    [Serializable]
     internal class Cutscene
     {
         public string name;
-        public readonly TimedText[] subtitles;
+        public TimedText[] subtitles;
+
+        public Cutscene(string name, TimedText[] subtitles)
+        {
+            this.name = name;
+            this.subtitles = subtitles;
+        }
     }
     [Serializable]
-    internal struct TimedText {
+    internal class TimedText {
         public string text; // text to be displayed
         public int time; // in ms
+
+        public TimedText(string text, int time)
+        {
+            this.text = text;
+            this.time = time;
+        }
     }
     [Serializable]
     internal class Dialog
     {
-        public readonly string background; // name of background file (e.g. "bg_10km.png")
-        public readonly int flags; /*
+        public string background; // name of background file (e.g. "bg_10km.png")
+        public int flags; /*
                                     * 0x01: skippable
                                     * 0x02: auto
                                     * 0x04: nosprites
                                     * 0x08: no BG
                                     */
-        public readonly DialogText[] dialogs;
+        public DialogText[] dialogs;
+
+        public Dialog(string background, int flags, DialogText[] dialogs)
+        {
+            this.background = background;
+            this.flags = flags;
+            this.dialogs = dialogs;
+        }
     }
     [Serializable]
-    internal struct DialogText
+    internal class DialogText
     {
-        public readonly DialogType type;
-        public readonly string text;
-        public readonly string author;
-        public readonly string sprite; // name of sprite file (e.g. "sprite_orma_crate.png")
-        public readonly uint color;
-        public readonly string voiceline; // name of voiceline file (e.g. "va_orma_007.wav"), might switch to Wwise
+        public DialogType type;
+        public string text;
+        public string author;
+        public string sprite; // name of sprite file (e.g. "sprite_orma_crate.png")
+        public uint color;
+        public string voiceline; // name of voiceline file (e.g. "va_orma_007.wav"), might switch to Wwise
+
+        public DialogText(DialogType type, string text, string author, string sprite, uint color, string voiceline)
+        {
+            this.type = type;
+            this.text = text;
+            this.author = author;
+            this.sprite = sprite;
+            this.color = color;
+            this.voiceline = voiceline;
+        }
     }
     [Serializable]
     internal enum DialogType
@@ -64,3 +132,5 @@ namespace Assets.Data.Texts.Schemas
         Erikative=3
     }
 }
+
+#pragma warning restore 0649

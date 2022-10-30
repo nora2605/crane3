@@ -16,7 +16,7 @@ namespace Data.Texts
 			langs = Resources.LoadAll("Texts/", typeof(TextAsset))
 				.Select(x => (TextAsset)x).ToArray();
             return Schemas.Texts.FromJson(
-                langs.First(x => x.name == langCode)?.text ?? langs.First(x => x.name == "en").text
+                langs.FirstOrDefault(x => x.name == langCode)?.text ?? langs.First(x => x.name == "en").text
             );
         } 
     }

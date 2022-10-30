@@ -27,7 +27,7 @@ public class UILangLoader : MonoBehaviour
         foreach (string key in currentLang.Keys)
         {
             GameObject go = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => key.Split("_")[1] == x.name.ToLower());
-			if (go == null || go == default(GameObject)) return;
+            if (go == null || go == default(GameObject)) continue;
             if (key.StartsWith("txt"))
                 go.GetComponentInChildren<TextMeshProUGUI>().text = currentLang[key];
             else if (key.StartsWith("img"))
@@ -38,10 +38,5 @@ public class UILangLoader : MonoBehaviour
     {
         UILangLoader.langCode = langCode;
         ReloadLang();
-    }
-
-    void Update()
-    {
-        
     }
 }

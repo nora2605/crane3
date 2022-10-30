@@ -9,6 +9,13 @@
     { "key": "txt_languagelabel", "value": "Sprache" },
     { "key": "txt_buttonapply", "value": "Anwenden" },
     { "key": "txt_buttonclose", "value": "Schließen" },
-    { "key": "txt_resolutionlabel", "value": "Auflösung" }
+    { "key": "txt_resolutionlabel", "value": "Auflösung" },
+    { "key": "txt_buttonloadsavestate", "value": "Laden" },
+    { "key": "txt_buttonnewgame", "value": "Neu" },
+    { "key": "txt_buttonremovesavestate", "value": "Löschen" },
+    { "key": "txt_buttonbacktomenu", "value": "Zurück" },
+    { "key": "txt_playmenulabel", "value": "Spielstände" },
+    { "key": "txt_savestatlastmodifiedl", "value": "Zuletzt gespielt:" },
+    { "key": "txt_nosavestats", "value": "Keine Speicherstände gefunden!" }
   ]
 }

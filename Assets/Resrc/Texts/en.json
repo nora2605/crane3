@@ -1,0 +1,25 @@
+{
+  "cutscenes": {},
+  "dialog":  {
+      "Ignore these, these are drafts for upcoming dialogs":  true,
+      "Do i look like im omnipotent?":  "That's what they say at least"
+  },
+  "ui": [
+    { "key": "img_title", "value": "title_en" },
+    { "key": "txt_buttonplay", "value": "Play" },
+    { "key": "txt_buttonsettings", "value": "Settings" },
+    { "key": "txt_buttonquit", "value": "Exit" },
+    { "key": "txt_settingslabel", "value": "Settings" },
+    { "key": "txt_languagelabel", "value": "Language" },
+    { "key": "txt_buttonapply", "value": "Apply" },
+    { "key": "txt_buttonclose", "value": "Close" },
+    { "key": "txt_buttonloadsavestate", "value": "Load" },
+    { "key": "txt_buttonnewgame", "value": "New" },
+    { "key": "txt_buttonremovesavestate", "value": "Delete" },
+    { "key": "txt_buttonbacktomenu", "value": "Back" },
+    { "key": "txt_playmenulabel", "value": "Save Files" },
+    { "key": "txt_savestatlastmodifiedl", "value": "Last Played:" },
+    { "key": "txt_nosavestats", "value": "No Save Stats Found!" },
+    { "key": "txt_gamenameplaceholder", "value": "Enter game name..." }
+  ]
+}

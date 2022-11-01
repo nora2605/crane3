@@ -63,3 +63,4 @@ crashlytics-build.properties
 # Build output
 bin/
 /IL2CPPbin
+/Assets/AddressableAssetsData

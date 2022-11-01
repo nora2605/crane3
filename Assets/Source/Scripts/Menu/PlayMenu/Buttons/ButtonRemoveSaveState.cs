@@ -17,7 +17,7 @@ public class ButtonRemoveSaveState : MonoBehaviour
 
     private void Update()
     {
-        removeSaveStateButton.enabled = Indexer.selected;
+        removeSaveStateButton.interactable = Indexer.selected;
     }
 
     void Remove()

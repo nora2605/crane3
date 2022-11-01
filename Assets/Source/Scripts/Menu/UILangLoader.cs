@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine.UI;
 using System;
 using Assets.Source.Data;
+using UnityEngine.AddressableAssets;
 
 public class UILangLoader : MonoBehaviour
 {
@@ -26,12 +27,12 @@ public class UILangLoader : MonoBehaviour
 
         foreach (string key in currentLang.Keys)
         {
-            GameObject go = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => key.Split("_")[1] == x.name.ToLower());
+            GameObject go = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => key.Split("_")[1].ToLower() == x.name.ToLower());
             if (go == null || go == default(GameObject)) continue;
             if (key.StartsWith("txt"))
                 go.GetComponentInChildren<TextMeshProUGUI>().text = currentLang[key];
             else if (key.StartsWith("img"))
-                go.transform.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(currentLang[key]);
+                go.transform.GetComponentInChildren<Image>().sprite = Addressables.LoadAssetAsync<Sprite>(currentLang[key]).WaitForCompletion();
         }
     }
     public static void ReloadLang(string langCode)

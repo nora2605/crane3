@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 namespace Menu.Settings
@@ -38,10 +39,9 @@ namespace Menu.Settings
 
             dropdown.ClearOptions();
             List<TMP_Dropdown.OptionData> langs = new();
-            foreach (TextAsset f in Resources.LoadAll<TextAsset>("Texts/"))
+            foreach (TextAsset f in Addressables.LoadAssetsAsync<TextAsset>("Texts", (_) => { }).WaitForCompletion())
             {
                 langs.Add(new TMP_Dropdown.OptionData(Languages.ContainsKey(f.name) ? Languages[f.name] : f.name));
-                Resources.UnloadAsset(f);
             }
             gameObject.GetComponent<TMP_Dropdown>().AddOptions(langs);
 

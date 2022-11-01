@@ -8,6 +8,8 @@ public class ButtonNewGame : MonoBehaviour
 {
     private Button newGameButton;
     public SceneLoader sceneLoader;
+    public GameObject inputField;
+
     void Start()
     {
         newGameButton = GetComponent<Button>();
@@ -16,6 +18,6 @@ public class ButtonNewGame : MonoBehaviour
 
     void NewGame()
     {
-        StartCoroutine(sceneLoader.LoadScene(2)); // Game First Cutscene
+        inputField.SetActive(true);
     }
 }

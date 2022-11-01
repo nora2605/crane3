@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Data.Texts
 {
@@ -13,8 +15,7 @@ namespace Data.Texts
 
         public static Schemas.Texts LoadLanguage(string langCode)
         {
-			langs = Resources.LoadAll("Texts/", typeof(TextAsset))
-				.Select(x => (TextAsset)x).ToArray();
+            langs = Addressables.LoadAssetsAsync("Texts", (TextAsset t) => { }).WaitForCompletion().ToArray();
             return Schemas.Texts.FromJson(
                 langs.FirstOrDefault(x => x.name == langCode)?.text ?? langs.First(x => x.name == "en").text
             );

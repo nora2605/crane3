@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Video;
 
 public class CutsceneController : MonoBehaviour
 {
     private VideoPlayer vp;
+    public TMP_Text subtitle;
     public Canvas canvas;
     private CanvasGroup canvasGroup;
     private AudioSource aS;
@@ -15,6 +17,8 @@ public class CutsceneController : MonoBehaviour
 
     void Start()
     {
+        // Load subtitles from lang.json file
+
         vp = Camera.main.GetComponent<VideoPlayer>();
         aS = Camera.main.GetComponent<AudioSource>();
 
@@ -26,6 +30,8 @@ public class CutsceneController : MonoBehaviour
 
     void Update()
     {
+        // Change Subtitle accordingly
+
         if (Input.anyKeyDown && !done)
             stoppedCutscene(vp);
     }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Source.Scripts.Game.Buttons
@@ -11,7 +6,7 @@ namespace Assets.Source.Scripts.Game.Buttons
     public class ChangeToBytecode : MonoBehaviour
     {
         private Button cbbc;
-        private bool byteedit = false; // Maybe going into a .dat for preferences
+        public static bool byteedit = false; // Maybe going into a .dat for preferences
         public GameObject[] VisEdit;
         public GameObject[] ByteEdit;
 

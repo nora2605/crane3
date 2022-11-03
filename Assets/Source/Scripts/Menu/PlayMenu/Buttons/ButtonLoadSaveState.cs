@@ -25,6 +25,6 @@ public class ButtonLoadSaveState : MonoBehaviour
     {
         SaveStateManager.gameName = Indexer.currentSelected.Split('\\', '/')[^1];
         SaveStateManager.Load();
-        StartCoroutine(sceneLoader.LoadScene(3));
+        StartCoroutine(sceneLoader.LoadScene(2));
     }
 }

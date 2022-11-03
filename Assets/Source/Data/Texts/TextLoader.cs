@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Data.Texts
 {
@@ -17,8 +12,8 @@ namespace Data.Texts
         {
             langs = Addressables.LoadAssetsAsync("Texts", (TextAsset t) => { }).WaitForCompletion().ToArray();
             return Schemas.Texts.FromJson(
-                langs.FirstOrDefault(x => x.name == langCode)?.text ?? langs.First(x => x.name == "en").text
+                (langs.Any(x => x.name == langCode) ? langs.First(x => x.name == langCode) : langs.First(x => x.name == "en")).text
             );
-        } 
+        }
     }
 }

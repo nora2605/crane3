@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
-using System.Threading.Tasks;
-using UnityEditor;
-using System.Runtime.Serialization;
-using System.Net.Http.Headers;
 
 #pragma warning disable CS0649
 
@@ -18,7 +12,7 @@ namespace Data.Texts.Schemas
         public Cutscene[] cutscenes;
         public Dialog[] dialog;
         public Dialog[] extras;
-        public Dictionary<string, string> UI { get => ToDictionary(this.ui); }
+        public Dictionary<string, string> UI => ToDictionary(ui);
         public KVPair[] ui;
 
         public Texts(Cutscene[] cutscenes, Dialog[] dialog, Dialog[] extras, KVPair[] ui)
@@ -74,7 +68,8 @@ namespace Data.Texts.Schemas
         }
     }
     [Serializable]
-    internal class TimedText {
+    internal class TimedText
+    {
         public string text; // text to be displayed
         public int time; // in ms
 
@@ -109,11 +104,12 @@ namespace Data.Texts.Schemas
         public DialogType type;
         public string text;
         public string author;
-        public string sprite; // name of sprite file (e.g. "sprite_orma_crate.png")
+        public string sprite; // name of sprite file (e.g. "sprite_orma_crate")
         public uint color;
-        public string voiceline; // name of voiceline file (e.g. "va_orma_007.wav"), might switch to Wwise
+        public string voiceline; // name of voiceline file (e.g. "va_orma_007"), might switch to Wwise
+        public float overrideAnimationSpeed;
 
-        public DialogText(DialogType type, string text, string author, string sprite, uint color, string voiceline)
+        public DialogText(DialogType type, string text, string author, string sprite, uint color, string voiceline, float overrideAnimationSpeed)
         {
             this.type = type;
             this.text = text;
@@ -121,15 +117,16 @@ namespace Data.Texts.Schemas
             this.sprite = sprite;
             this.color = color;
             this.voiceline = voiceline;
+            this.overrideAnimationSpeed = overrideAnimationSpeed;
         }
     }
     [Serializable]
     internal enum DialogType
     {
-        Pause=0,
-        Text=1,
-        Prompt=2,
-        Erikative=3
+        Pause = 0,
+        Text = 1,
+        Prompt = 2,
+        Erikative = 3
     }
 }
 

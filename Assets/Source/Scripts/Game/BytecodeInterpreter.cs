@@ -1,41 +1,30 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.Source.Scripts.Game
 {
     public static class BytecodeInterpreter
     {
         public static bool win;
+        public static int totalInstructions = 0;
+        public static int instructionPointer = 0;
 
         public static IEnumerator Execute(string code, Crane crane)
         {
-            if (win) yield break;
-            int instructionPointer = 0; 
+            if (win)
+            {
+                yield break;
+            }
+
             bool result = false; // Condition
             bool exif = false; // Check for the condition in result?
             int looplevel = 0; // Nested Loops
             int loopn = 0; // Amount to loop for, -1 is infinite (until break;
-            int totalInstructions = 0;
-            List<int> loopAmount = new List<int>();
+            List<int> loopAmount = new();
+            instructionPointer = 0;
             while (instructionPointer < code.Length)
             {
-                for (int x = 0; x < Level.dimensions.Item1; x++)
-                {
-                    for (int y = 0; y < Level.dimensions.Item2; y++)
-                    {
-                        if (Level.levelMap[x, y] == Tile.Target && Level.propMap[x, y] == Prop.Crate)
-                        {
-                            win = true;
-                        }
-                    }
-                }
-                Level.crane.ExecuteSwitchMap(Level.switchMap);
-                if ((exif && result) || !exif || exif && (code[instructionPointer] == '!')) // Either the condition is met, or there's no checking for conditions
+                if ((exif && result) || !exif || (exif && (code[instructionPointer] == '!'))) // Either the condition is met, or there's no checking for conditions
                 {
                     exif = false;
                     switch (code[instructionPointer])
@@ -54,9 +43,11 @@ namespace Assets.Source.Scripts.Game
                             break;
                         case '.':
                             crane.Attach();
+                            Level.crane.ExecuteSwitchMap(Level.switchMap);
                             break;
                         case ',':
                             crane.Detach();
+                            Level.crane.ExecuteSwitchMap(Level.switchMap);
                             break;
                         case '+':
                             crane.Extend();
@@ -74,79 +65,104 @@ namespace Assets.Source.Scripts.Game
                             looplevel++;
                             loopAmount.Add(loopn);
                             loopn = 0;
-                            break;
+                            goto SkipDelay;
                         case ']':
                             loopAmount[looplevel - 1]--;
                             if (loopAmount[looplevel - 1] == 0)
                             {
                                 looplevel--;
-                                loopAmount.RemoveAt(looplevel - 1);
+                                loopAmount.RemoveAt(looplevel);
+                                break;
                             }
                             else if (loopAmount[looplevel - 1] < 0)
-                                loopAmount[looplevel - 1] = -1;
-                            else
                             {
-                                instructionPointer = code.LastIndexOf('[', 0, instructionPointer) + 1;
+                                loopAmount[looplevel - 1] = -1;
                             }
-                            break;
+
+                            instructionPointer = code.LastIndexOf('[', instructionPointer - 1);
+                            goto SkipDelay;
                         case '(':
                             if (!result)
                             {
                                 instructionPointer = code.IndexOf(')', instructionPointer);
                             }
-                            break;
+                            goto SkipDelay;
                         case ')':
-
-                            break;
+                            goto SkipDelay;
                         case 'C':
                             result = crane.IsAboveTile(Tile.Crate);
                             exif = true;
-                            break;
+                            goto SkipDelay;
                         case '!':
                             result = !result;
-                            break;
+                            goto SkipDelay;
                         case 'T':
                             result = crane.IsAboveTile(Tile.Target);
                             exif = true;
-                            break;
+                            goto SkipDelay;
                         case 'S':
                             result = crane.IsAboveTile(Tile.Switch);
                             exif = true;
-                            break;
+                            goto SkipDelay;
                         case '*':
                             loopn = -1;
-                            break;
+                            goto SkipDelay;
                         case ';':
-                            looplevel--;
-                            loopAmount.RemoveAt(looplevel - 1);
-                            instructionPointer = code.IndexOf("]", instructionPointer) + 1;
-                            break;
+                            loopAmount.RemoveAt(--looplevel);
+                            instructionPointer = code.IndexOf("]", instructionPointer);
+                            goto SkipDelay;
                         case '|':
                             result = crane.IsAtEnd(true);
                             exif = true;
-                            break;
+                            goto SkipDelay;
                         case '_':
                             result = crane.IsAtEnd(false);
                             exif = true;
-                            break;
-                        default: 
+                            goto SkipDelay;
+                        default:
+                            if (code[instructionPointer] is not (> '0' and <= '9'))
+                            {
+                                goto SkipDelay;
+                            }
                             break;
                     }
-                    if (code[instructionPointer] > '0' && code[instructionPointer] <= '9') // 2 Numbers after each other will overwrite the last one, useful for if statements
+                    if (code[instructionPointer] is > '0' and <= '9') // 2 Numbers after each other will overwrite the last one, useful for if statements
                     {
                         loopn = code[instructionPointer] - '0';
+                        goto SkipDelay;
                     }
                     else if (loopn > 0) // Direct Loop, doesn't work with star
                     {
                         loopn--;
-                        if (loopn > 0) instructionPointer--;
+                        if (loopn > 0)
+                        {
+                            instructionPointer--;
+                        }
                     }
-                    instructionPointer++;
+                    yield return null;
                 }
-                else exif = false;
-                yield return null;
+                else
+                {
+                    exif = false;
+                }
+
+                SkipDelay:
+                instructionPointer++;
                 totalInstructions++;
-                if (totalInstructions > 32000) break;
+                if (totalInstructions > 32000)
+                {
+                    break;
+                }
+            }
+            for (int x = 0; x < Level.dimensions.Item1; x++)
+            {
+                for (int y = 0; y < Level.dimensions.Item2; y++)
+                {
+                    if (Level.levelMap[x, y] == Tile.Target && Level.propMap[x, y] == Prop.Crate)
+                    {
+                        win = true;
+                    }
+                }
             }
         }
     }

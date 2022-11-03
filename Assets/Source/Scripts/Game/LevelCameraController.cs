@@ -1,7 +1,4 @@
 using Assets.Source.Scripts.Game;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class LevelCameraController : MonoBehaviour
@@ -11,16 +8,18 @@ public class LevelCameraController : MonoBehaviour
     private Vector2 mousePos;
     float currentDistance;
     Camera cam;
+    private float initcamy;
 
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.allCameras.First(x => x.name == "3DPrev");
+        cam = Camera.main;
         currentDistance = 10 * Mathf.Sqrt(Level.dimensions.Item1 * Level.dimensions.Item1 + Level.dimensions.Item2 * Level.dimensions.Item2);
+        initcamy = cam.transform.position.y;
         float destinationDegrees = 45;
         cam.transform.position = new Vector3(
             currentDistance * Mathf.Cos(destinationDegrees * Mathf.PI / 180),
-            cam.transform.position.y,
+            initcamy,
             currentDistance * Mathf.Sin(destinationDegrees * Mathf.PI / 180)
         );
         cam.transform.LookAt(Vector3.zero);
@@ -41,7 +40,7 @@ public class LevelCameraController : MonoBehaviour
             float destinationDegrees = currentDegrees - (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - mousePos).x;
             cam.transform.position = new Vector3(
                 currentDistance * Mathf.Cos(destinationDegrees * Mathf.PI / 180), 
-                cam.transform.position.y, 
+                initcamy + (mousePos.y - Input.mousePosition.y), 
                 currentDistance * Mathf.Sin(destinationDegrees * Mathf.PI / 180)
             );
             cam.transform.LookAt(Vector3.zero);

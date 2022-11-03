@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Source.Data
@@ -26,7 +23,11 @@ namespace Assets.Source.Data
                         File.WriteAllText(Application.persistentDataPath + "/lang.dat", res);
                     }
                 }
-                else res = langCode;
+                else
+                {
+                    res = langCode;
+                }
+
                 return res;
             }
             set
@@ -54,7 +55,11 @@ namespace Assets.Source.Data
                         File.WriteAllText(Application.persistentDataPath + "/res.dat", res.width + "x" + res.height);
                     }
                 }
-                else res = resolution;
+                else
+                {
+                    res = resolution;
+                }
+
                 return res;
             }
             set

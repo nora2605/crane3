@@ -64,3 +64,5 @@ crashlytics-build.properties
 bin/
 /IL2CPPbin
 /Assets/AddressableAssetsData
+
+/Assets/Media/

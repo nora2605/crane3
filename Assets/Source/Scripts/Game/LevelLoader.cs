@@ -24,7 +24,10 @@ namespace Assets.Source.Scripts.Game
         public GameObject Plane;
         public Transform Anchor;
 
-        public CraneController crane;
+        internal CraneController crane;
+        internal Transform craneInstance;
+        internal GameObject[,] tileInstances;
+        internal GameObject[,] propInstances;
 
         public Dictionary<Tile, GameObject> tileDict;
 
@@ -43,6 +46,9 @@ namespace Assets.Source.Scripts.Game
             string lvl = Addressables.LoadAssetAsync<TextAsset>("Level" + LocalGame.levelNumber).WaitForCompletion().text;
             Level.LoadLevel(lvl);
 
+            tileInstances = new GameObject[Level.dimensions.Item1, Level.dimensions.Item2];
+            propInstances = new GameObject[Level.dimensions.Item1, Level.dimensions.Item2];
+
             Plane.transform.localScale = new Vector3(Level.dimensions.Item2 * 10, 1, Level.dimensions.Item1 * 10);
             Anchor.position = new Vector3(-Level.dimensions.Item2 * 5, 0, -Level.dimensions.Item1 * 5);
 
@@ -56,6 +62,7 @@ namespace Assets.Source.Scripts.Game
                         t.transform.localPosition = new Vector3(y * 10, 0, x * 10);
                         t.name = $"{Level.levelMap[x,y]}: {x};{y}";
                         t.SetActive(true);
+                        tileInstances[x, y] = t;
                     }
                 }
             }
@@ -63,6 +70,7 @@ namespace Assets.Source.Scripts.Game
             this.crane = crane.GetComponent<CraneController>();
             crane.name = "Crane";
             crane.transform.localPosition = new Vector3(Level.crane.position.Y * 10, 0, Level.crane.position.X * 10); // Remember: X and Y are Z and X, not X and Z
+            craneInstance = crane.transform;
         }
 
         // responsible for:

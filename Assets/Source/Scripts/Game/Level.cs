@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.Source.Scripts.Game
 {
@@ -14,6 +11,8 @@ namespace Assets.Source.Scripts.Game
         public static List<(Point, Point, Tile, Tile)> switchMap = new(); // Switch Point, Target Point, Tile (false), Tile (true)
         public static Prop[,] propMap; // Moved/Movable objects
         public static Crane crane; // The crane (also technically a prop but treated s p e c i a l l y)
+
+        private static string _lvldata;
 
         public static Dictionary<string, Tile> tileDict = new()
         {
@@ -30,6 +29,7 @@ namespace Assets.Source.Scripts.Game
         public static void LoadLevel(string lvldata)
         {
             string[] lvl = lvldata.Split('\n').Select(x => x.Replace("\r", "")).ToArray();
+            _lvldata = lvldata;
             switchMap.Clear();
             dimensions = (int.Parse(lvl[0].Split(';')[0]), int.Parse(lvl[0].Split(';')[1]));
             crane = new()
@@ -39,7 +39,48 @@ namespace Assets.Source.Scripts.Game
             lvl = lvl.Skip(2).ToArray();
             levelMap = new Tile[dimensions.Item1, dimensions.Item2];
             propMap = new Prop[dimensions.Item1, dimensions.Item2];
-            for (int i = 0; i < propMap.Length; i++) propMap[i % dimensions.Item1, i / dimensions.Item1] = Prop.None; // Init all props to none
+            for (int i = 0; i < propMap.Length; i++)
+            {
+                propMap[i % dimensions.Item1, i / dimensions.Item1] = Prop.None; // Init all props to none
+            }
+
+            for (int i = 0; i < lvl.Length; i++)
+            {
+                levelMap[i % dimensions.Item1, i / dimensions.Item1] = lvl[i].Length > 0 ? tileDict[lvl[i][..1]] : Tile.Empty;
+                if (lvl[i].StartsWith("S"))
+                {
+                    string dim = lvl[i].Split(' ')[1].Split(':')[0];
+                    string falseb = lvl[i].Split(' ')[1].Split(':')[1];
+                    string trueb = lvl[i].Split(' ')[1].Split(':')[2]; // Redundancy is cool... right?
+                    switchMap.Add((
+                        new Point(i % dimensions.Item1, i / dimensions.Item1),
+                        new Point(int.Parse(dim.Split(';')[0]), int.Parse(dim.Split(';')[1])),
+                        tileDict[falseb],
+                        tileDict[trueb]
+                    ));
+                }
+            }
+        }
+
+        public static void Reset()
+        {
+            string[] lvl = _lvldata.Split('\n').Select(x => x.Replace("\r", "")).ToArray();
+            switchMap.Clear();
+            dimensions = (int.Parse(lvl[0].Split(';')[0]), int.Parse(lvl[0].Split(';')[1]));
+            crane.position = new Point(int.Parse(lvl[1].Split(';')[0]), int.Parse(lvl[1].Split(';')[1]));
+            crane.direction = Direction.Right;
+            crane.extended = false;
+            crane.holding = Prop.None;
+            crane.attached = false;
+            crane.high = false;
+            lvl = lvl.Skip(2).ToArray();
+            levelMap = new Tile[dimensions.Item1, dimensions.Item2];
+            propMap = new Prop[dimensions.Item1, dimensions.Item2];
+            for (int i = 0; i < propMap.Length; i++)
+            {
+                propMap[i % dimensions.Item1, i / dimensions.Item1] = Prop.None; // Init all props to none
+            }
+
             for (int i = 0; i < lvl.Length; i++)
             {
                 levelMap[i % dimensions.Item1, i / dimensions.Item1] = lvl[i].Length > 0 ? tileDict[lvl[i][..1]] : Tile.Empty;

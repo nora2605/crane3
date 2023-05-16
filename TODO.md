@@ -9,35 +9,47 @@
 - Sound Effects for Click, and stuff
 - Aesthetics
 - background moving/ more interesting background graphic with the tower or sth
-- Graphics Quality
+- Quality Selector
 - Volume Control
 
 ## Game
 
-- 3D Level Handler
-- Fix 2D Handler anchors, give texture instead of color
-- Visual Editor
-- Bytecode documentation (UI document)
-- VA
 - Sound Effects for every Bytecode Action
 - Aesthetics
-- 12 cutscenes (
-		Beginning (Redo in 3D with SFX and custom Subtitles),
-		Level 1 - Awakening,
-		Level 2 - Progress,
-		Level 10 - Memories,
-		Level 10 - The Crate manifests,
-		Level 20 - Memories,
-		Level 20 - The other one,
-		Level 30 - Memories,
-		Level 30 - Henry,
-		Level 40 - Memories,
-		Level 40 - God,
-		Level 40 - End of a Crane,
-		Level 40 - Rebuild of Earth + Credits
-)
 
 ## Dialog
+
+- Sprites
+	- Jesa
+	- Mr Kackbüddl
+	- Crane
+	- Crate
+	- Orma
+	- Henry
+	- Artificial Human
+	- Zhongshiu
+	- Crane2
+	- God
+	- Kleopatrus
+
+- 12 cutscenes (
+		Beginning (edit with SFX, fadeout etc.),
+		Level 1 - Awakening, <!-- called from dialogscene as dialogNumber 0 -->
+		Level 2 - Progress, <!-- called from dialogscene as dialogNumber 1 -->
+		Level 10 - Memories, <!-- called from dialogscene as dialogNumber 10 -->
+		Level 10 - The Crate manifests, <!-- called from dialogscene as dialogNumber 11 -->
+		Level 20 - Memories, <!-- called from dialogscene as ... -->
+		Level 20 - The other one, <!-- called from dialogscene -->
+		Level 30 - Memories, <!-- called from dialogscene -->
+		Level 30 - Henry, <!-- called from dialogscene -->
+		Level 40 - Memories, <!-- called from dialogscene -->
+		Level 40 - God, <!-- called from BossBattle -->
+		Level 40 - End of a Crane, <!-- called from BossBattle -->
+		Level 40 - Rebuild of Earth + Credits <!-- called from BossBattle -> Returns to menu, Loading of SaveState will go to a Level Loading and Editing screen and/or some easter eggs on a backdrop of the crane world map as lore -->
+)
+
+Support for Prompts
+VA
 
 ### Level 1
 
@@ -122,24 +134,25 @@
 ## Cutscenes
 
 ### Beginning
-Similar to the one that's already present, just in hq ig
+Done, just needs SFX
+
 ### Level 1 - Awakening
 
 ### Level 2 - Progress
 
-### Level 10 - Memories
+### Level 10 - Memories & Godworld
 
 ### Level 10 - The Crate manifests
 
-### Level 20 - Memories
+### Level 20 - Memories & Godworld
 
 ### Level 20 - The other one
 
-### Level 30 - Memories
+### Level 30 - Memories & Godworld
 
 ### Level 30 - Henry
 
-### Level 40 - Memories
+### Level 40 - Memories & Godworld
 
 ### Level 40 - God
 

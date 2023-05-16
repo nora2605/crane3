@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
-using UnityEngine;
 using Assets.Source.Scripts;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonBackToMenu : MonoBehaviour
 {

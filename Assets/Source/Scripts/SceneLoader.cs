@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +10,7 @@ namespace Assets.Source.Scripts
 
         public IEnumerator LoadScene(int index)
         {
+            index = index != 2 ? index : DialogController.Available ? 2 : 3;
             // Play animation
             transition.SetTrigger("Transition");
             yield return new WaitForSeconds(1);
@@ -21,7 +18,6 @@ namespace Assets.Source.Scripts
             AsyncOperation op = SceneManager.LoadSceneAsync(index);
             while (!op.isDone)
             {
-                Debug.Log(op.progress);
                 yield return null;
             }
         }

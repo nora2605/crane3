@@ -1,9 +1,5 @@
 using Assets.Source.Scripts;
-using Assets.Source.Scripts.Game;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class DNCycle : MonoBehaviour
 {
@@ -17,6 +13,8 @@ public class DNCycle : MonoBehaviour
     public AudioClip ads20;
     public AudioClip ads30;
     public AudioClip ads40;
+
+    public ReflectionProbe refProbe;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +41,7 @@ public class DNCycle : MonoBehaviour
         }
         RenderSettings.skybox.SetFloat("_Rotation", Time.time);
         ads.Play();
+        refProbe.RenderProbe();
     }
     void Update()
     {

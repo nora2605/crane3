@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Source.Scripts.Game
@@ -25,6 +21,8 @@ namespace Assets.Source.Scripts.Game
             if (gameName.Length == 0 || !File.Exists(Application.persistentDataPath + "/saves/" + gameName)) { return; }
             string gameFile = File.ReadAllText(Application.persistentDataPath + "/saves/" + gameName, Encoding.UTF8);
             LocalGame.levelNumber = int.Parse(gameFile);
+            LocalGame.dialogNumber = LocalGame.levelNumber - 1;
+            LocalGame.cutsceneNumber = -1;
         }
     }
 }

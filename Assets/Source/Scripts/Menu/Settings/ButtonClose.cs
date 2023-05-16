@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 public class ButtonClose : MonoBehaviour
 {
@@ -31,7 +28,7 @@ public class ButtonClose : MonoBehaviour
         canvasGroup.alpha = 1f;
         while (timeElapsed < lerpDuration)
         {
-            canvasGroup.alpha = 1.0f - timeElapsed / lerpDuration;
+            canvasGroup.alpha = 1.0f - (timeElapsed / lerpDuration);
             timeElapsed += Time.deltaTime;
             yield return null;
         }

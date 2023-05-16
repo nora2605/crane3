@@ -1,9 +1,26 @@
 {
-  "cutscenes": {},
-  "dialog":  {
-      "Ignore these, these are drafts for upcoming dialogs":  true,
-      "Do i look like im omnipotent?":  "That's what they say at least"
-  },
+  "cutscenes": [
+        {
+            "name":  "cs_one",
+            "subtitles": [
+                { "time": 0, "text":  "Mankind has always thought of itself as superior" },
+                { "time": 8, "text": "and in their hubris, they tried to reach god himself." },
+                { "time": 16, "text":  "But their limitations wouldn't allow it." },
+                { "time": 24, "text": "Although they failed again and again, their plans got better. They never realised..." },
+                { "time": 32, "text":  "And with modern civilisation they had finally achieved a technology that would surpass them." },
+                { "time": 40, "text": "A fully automated gigantic building project was established so Mankind could reach its goal." },
+                { "time": 48, "text":  "To punish them for their flaws, god erased all live on earth that would dare to step up to him," },
+                { "time": 56, "text": "Only leaving the plants and liveless matter behind." }
+            ]
+        }
+  ],
+  "dialog":  [
+    { "background":  "bg_start", "flags": 9, "dialogs": [
+        {"type":  1, "text": "bing qilin", "author":  "crane", "color": 16776960 },
+        {"type":  1, "sprite": "nerd", "text": "I'd just like to interject for a moment. What you're referring to as Linux, is in fact, GNU/Linux, or as I've recently taken to calling it, GNU+Linux. Linux is not an operating system unto itself, but rather another free component of a fully functioning GNU system made useful by the GNU corelibs, shell utilities and vital system components comprising a full OS as defined by POSIX.\nMany computer users run a modified version of the GNU System every day, without realizing it. Through a peculiar turn of events, the version of GNU which is widely used today is often called \"Linux\"\n\n\n", "author":  "nerd", "color": 6776960, "overrideAnimationSpeed":  0.001 },
+        {"type":  1, "text": "uhm actually no", "author":  "crane", "color": 6776960 }
+      ]}
+  ],
   "ui": [
     { "key": "img_title", "value": "title_en" },
     { "key": "txt_buttonplay", "value": "Play" },
@@ -20,6 +37,16 @@
     { "key": "txt_playmenulabel", "value": "Save Files" },
     { "key": "txt_savestatlastmodifiedl", "value": "Last Played:" },
     { "key": "txt_nosavestats", "value": "No Save Stats Found!" },
-    { "key": "txt_gamenameplaceholder", "value": "Enter game name..." }
+    { "key": "txt_gamenameplaceholder", "value": "Enter game name..." },
+    { "key": "txt_buttonstart", "value": "Start" },
+    { "key": "txt_buttonstartreset", "value": "Reset" },
+    { "key": "txt_buttonstartwon", "value": "You won!" },
+    { "key": "txt_buttonstop", "value": "Stop" },
+    { "key": "txt_buttonsaveandexittomenu", "value": "Save and Exit" },
+    { "key": "txt_buttonchbytecode", "value": "Change to Bytecode Editor" },
+    { "key": "txt_buttontransliterate", "value": "Transliterate" },
+    { "key": "txt_buttonproceed", "value": "Next Level" },
+    { "key": "txt_htp_title", "value": "How to play:" },
+    { "key": "txt_htp_body", "value": "The goal: Get the Crate to the Green Target.\nHow: Program a timeline to make the crane do what you need:\n\n\n1. Drag and Drop the blocks from the bottom right to the timeline right to the list.\n2. Click on Start to execute the timeline\n3. Change the speed of the animation with the Speed Slider\n4. Click on stop to cancel if the execution gets stuck\n5. If you don't win after the timeline finishes, you have to click on Reset\n6. Change to bytecode editor to write the raw code! That might be faster if you know the symbols! (To learn them, simply click on the transliterate button after making a program in the timeline)" }
   ]
 }
